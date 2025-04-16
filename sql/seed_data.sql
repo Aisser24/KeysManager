@@ -1,12 +1,12 @@
 use keysmanager;
 
 -- Insert sample data into tokens table
-INSERT INTO tokens (token_number) VALUES
-(1),
-(2),
-(3),
-(4),
-(5);
+INSERT INTO tokens (token_number, token_type, token_description) VALUES
+(1, 'RFID', 'RFID Token für den Übungsplatz'),
+(2, 'Schlüssel', 'Schlüssel für die Werkstatt'),
+(3, 'RFID', 'RFID Token für den Schulungsraum'),
+(4, 'RFID', 'RFID Token für den Pausenraum'),
+(5, 'RFID', 'RFID Token für den Parkplatz');
 
 -- Insert sample data into mitarbeiter table
 INSERT INTO mitarbeiter (vorname, nachname, email, position, status) VALUES
@@ -19,7 +19,7 @@ INSERT INTO mitarbeiter (vorname, nachname, email, position, status) VALUES
     ('Michael', 'Fischer', 'michael.fischer@company.at', 'Buchhalter', 0);
 
 -- Insert sample data into keysmitarbeiter table
-INSERT INTO keysmitarbeiter (token_id, mitarbeiter_id, ausgabedatum) VALUES
+INSERT INTO keyassignments (token_id, mitarbeiter_id, ausgabedatum) VALUES
     (1, 1, '2023-01-01'),
     (2, 2, '2023-02-01'),
     (3, 3, '2023-03-01'),

@@ -7,7 +7,12 @@ SET time_zone = "+00:00";
 
 create table tokens(
 	token_id integer auto_increment primary key,
-	token_number integer
+	token_number integer,
+    is_active boolean default true,
+    token_type varchar(45) default null,
+    token_description varchar(255) default null,
+    added_date date default current_date,
+    deleted_date date default null
 );
 
 CREATE TABLE mitarbeiter (
@@ -20,10 +25,10 @@ CREATE TABLE mitarbeiter (
     PRIMARY KEY (mitarbeiter_id)
 );
 
-create table keysmitarbeiter(
+create table keyassignments (
     token_id integer NOT NULL,
     mitarbeiter_id int(11) NOT NULL,
-    ausgabedatum date,
+    ausgabedatum date default current_date,
     rueckgabedatum date,
     primary key (token_id, mitarbeiter_id, ausgabedatum),
     foreign key (token_id) references tokens(token_id),

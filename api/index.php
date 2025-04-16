@@ -1,28 +1,30 @@
 <?php
+require_once 'Router.php';
+require_once 'handlers.php';
 header('Content-Type: application/json');
-$method = $_SERVER['REQUEST_METHOD'];
 
-$path_info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
-$request = explode('/', trim($path_info, '/'));
+$router = new Router('/api');
 
-if (empty($request[0])) {
-    // Either show API info or redirect to documentation
-    echo json_encode([
-        'status' => 'API is running',
-        'available_endpoints' => [
-            '/users' => 'User management endpoints'
-            // Add other endpoints as you create them
-        ]
-    ]);
-    exit;
-}
+// Tokens
+$router->add("GET", "/tokens", "listTokens");
+$router->add("GET", "/tokens/{id}", "getToken");
+$router->add("POST", "/tokens", "createToken");
+$router->add("PUT", "/tokens/{id}", "updateToken");
+$router->add("DELETE", "/tokens/{id}", "deleteToken");
+$router->add("GET", "/tokens/{id}/history", "getTokenHistory");
 
-switch ($request[0]) {
-    case 'users':
-        require_once 'users.php';
-        break;
-    default:
-        http_response_code(404);
-        echo json_encode(['error' => 'Not Found']);
-        break;
-}
+// Mitarbeiter
+$router->add("GET", "/mitarbeiter", "listMitarbeiter");
+$router->add("GET", "/mitarbeiter/{id}", "getMitarbeiter");
+$router->add("GET", "/mitarbeiter/{id}/tokens", "getMitarbeiterTokens");
+
+// Token Assignments
+$router->add("GET", "/assignments", "listAssignments");
+$router->add("GET", "/assignments/active", "listActiveAssignments");
+$router->add("POST", "/assignments", "createAssignment");
+$router->add("PUT", "/assignments/return", "returnToken");
+
+// Exports
+$router->add("GET", "/exports/xlsx", "exportXlsx");
+
+$router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['PATH_INFO']);
