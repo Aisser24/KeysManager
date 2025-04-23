@@ -20,7 +20,7 @@ function listTokens(): void
 {
     global $pdo;
 
-    $sql = "SELECT * FROM tokens where is_active = 1";
+    $sql = "SELECT token_id, token_number, token_type, token_description, added_date FROM tokens where is_active = 1";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $tokens = $stmt->fetchAll(PDO::FETCH_ASSOC);
