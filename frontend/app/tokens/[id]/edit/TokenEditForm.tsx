@@ -161,19 +161,11 @@ const TokenEditForm = ({ token }: { token: Token }) => {
                     />
                 </div>
             </div>
-            {/* <div className="mt-6 flex justify-end space-x-3">
-                <Button variant="secondary" onClick={handleCancel}>
-                    Abbrechen
-                </Button>
-                <Button onClick={() => handleSave(tokenNumber, tokenType, tokenDescription)}>
-                    Speichern
-                </Button>
-            </div> */}
             <div className="mt-6 flex justify-between">
                 <div>
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
-                            <Button variant="destructive">
+                            <Button variant="destructive" className="cursor-pointer">
                                 Löschen
                             </Button>
                         </AlertDialogTrigger>
@@ -187,17 +179,17 @@ const TokenEditForm = ({ token }: { token: Token }) => {
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
-                                <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-                                <AlertDialogAction onClick={confirmDelete}>Löschen</AlertDialogAction>
+                                <AlertDialogCancel className="cursor-pointer">Abbrechen</AlertDialogCancel>
+                                <AlertDialogAction onClick={confirmDelete} className="cursor-pointer">Löschen</AlertDialogAction>
                             </AlertDialogFooter>
                         </AlertDialogContent>
                     </AlertDialog>
                 </div>
                 <div className="flex space-x-3">
-                    <Button variant="secondary" onClick={handleCancel}>
+                    <Button variant="secondary" onClick={handleCancel} className="cursor-pointer">
                         Abbrechen
                     </Button>
-                    <Button onClick={() => handleSave(tokenNumber, tokenType, tokenDescription)}>
+                    <Button onClick={() => handleSave(tokenNumber, tokenType, tokenDescription)} className="cursor-pointer">
                         Speichern
                     </Button>
                 </div>

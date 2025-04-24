@@ -20,10 +20,10 @@ INSERT INTO mitarbeiter (vorname, nachname, email, position, status) VALUES
 
 -- Insert sample data into keysmitarbeiter table
 INSERT INTO keyassignments (token_id, mitarbeiter_id, ausgabedatum) VALUES
-    (1, 1, '2023-01-01'),
-    (2, 2, '2023-02-01'),
-    (3, 3, '2023-03-01'),
-    (4, 4, '2023-04-01'),
-    (5, 5, '2023-05-01'),
-    (1, 6, '2023-06-01'),
-    (2, 7, '2023-07-01');
+    (1, 1, current_date),
+    (2, 2, current_date),
+    (3, 3, current_date),
+    (4, 4, current_date),
+    (5, 5, current_date),
+    (1, 6, current_date),
+    (2, 7, current_date);

@@ -3,6 +3,10 @@ import { Skeleton } from "./ui/skeleton"
 
 const TableSkeleton = () => {
   return (
+    <>
+    <div className="flex justify-end py-4">
+        <Skeleton className="h-8 w-24 m-4" />
+    </div>
     <div className="rounded-md border">
         {/* Tabellenkopf */}
         <div className="border-b bg-muted/50 px-4 py-3">
@@ -30,6 +34,7 @@ const TableSkeleton = () => {
             }
         </div>
     </div>
+    </>
   )
 }
 

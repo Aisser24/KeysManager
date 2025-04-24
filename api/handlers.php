@@ -261,7 +261,21 @@ function listActiveAssignments(): void
 {
     global $pdo;
 
-    $sql = "SELECT token_id, mitarbeiter_id, ausgabedatum from keyassignments where rueckgabedatum is null";
+    $sql = "
+    SELECT 
+        ka.token_id, 
+        ka.mitarbeiter_id, 
+        ka.ausgabedatum, 
+        m.vorname, 
+        m.nachname, 
+        t.token_type, 
+        t.token_number, 
+        t.token_description
+    FROM keyassignments ka
+    JOIN mitarbeiter m ON ka.mitarbeiter_id = m.mitarbeiter_id
+    JOIN tokens t ON ka.token_id = t.token_id
+    WHERE ka.rueckgabedatum IS NULL
+";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);

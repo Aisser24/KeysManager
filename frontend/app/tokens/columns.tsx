@@ -26,13 +26,8 @@ const EditButton = ({ tokenId }: { tokenId: number }) => {
 
 export const columns: ColumnDef<Token>[] = [
     {
-        accessorKey: "token_id",
-        header: "ID",
-        cell: (info) => info.getValue(),
-    },
-    {
         accessorKey: "token_number",
-        header: "Token Nummer",
+        header: "Nr",
         cell: (info) => info.getValue(),
     },
     {

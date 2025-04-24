@@ -15,7 +15,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import React from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
@@ -24,8 +24,8 @@ interface DataTableProps<TData, TValue> {
     data: TData[]
 }
 
-export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, TValue>) {
-    const [rowSelection, setRowSelection] = React.useState({})
+const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
+    const [rowSelection, setRowSelection] = useState({})
 
     const table = useReactTable({
         data,
@@ -40,7 +40,7 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
     return (
         <div>
             <div className="flex justify-end pb-4">
-                <Link href={"/tokens/create"}>
+                <Link href={"/assignments/create"}>
                     <Button variant="default" className="cursor-pointer">Neu</Button>
                 </Link>
             </div>
@@ -91,3 +91,5 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
         </div>
     )
 }
+
+export default DataTable

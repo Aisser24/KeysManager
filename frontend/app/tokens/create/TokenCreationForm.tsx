@@ -135,10 +135,10 @@ const TokenCreationForm = () => {
                     />
                 </div>
                 <div className="mt-6 flex justify-end space-x-3">
-                    <Button variant="secondary" onClick={handleCancel}>
+                    <Button variant="secondary" onClick={handleCancel} className="cursor-pointer">
                         Abbrechen
                     </Button>
-                    <Button onClick={handleSave}>
+                    <Button onClick={handleSave} className="cursor-pointer">
                         Erstellen
                     </Button>
                 </div>
