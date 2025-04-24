@@ -177,8 +177,7 @@ function getTokenTypes(): void {
     if ($tokens) {
         echo json_encode($tokens);
     } else {
-        http_response_code(404);
-        echo json_encode(['error' => 'No tokens found']);
+        echo json_encode([]);
     }
 }
 
