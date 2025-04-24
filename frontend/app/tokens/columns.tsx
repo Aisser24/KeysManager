@@ -13,6 +13,8 @@ const EditButton = ({ tokenId }: { tokenId: number }) => {
         <Button
             variant="outline"
             className="h-8 w-8 p-0 cursor-pointer"
+            name="edit"
+            aria-label="Edit"
             onClick={() => {
                 router.push(`/tokens/${tokenId}/edit`)
             }}

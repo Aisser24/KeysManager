@@ -1,7 +1,7 @@
 "use client"
 
 import { DataTable } from './DataTable'
-import { columns } from './columns'
+import { columns } from './Columns'
 import StatusToast from './StatusToast'
 import { useEffect, useState } from 'react'
 import TableSkeleton from '@/components/TableSkeleton'
