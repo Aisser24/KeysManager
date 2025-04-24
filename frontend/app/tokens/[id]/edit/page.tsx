@@ -1,5 +1,5 @@
 import { Token } from "@/types/api";
-import TokenEditForm from "./MyDialog";
+import TokenEditForm from "./TokenEditForm";
 
 const Page = async ({
     params,

@@ -167,6 +167,20 @@ function getTokenHistory($id): void
         echo json_encode(['error' => 'No history found for this token']);
     }
 }
+function getTokenTypes(): void {
+    global $pdo;
+
+    $sql = "SELECT DISTINCT token_type FROM tokens where is_active = 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $tokens = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    if ($tokens) {
+        echo json_encode($tokens);
+    } else {
+        http_response_code(404);
+        echo json_encode(['error' => 'No tokens found']);
+    }
+}
 
 // Mitarbeiter
 function listMitarbeiter(): void

@@ -16,6 +16,8 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import React from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -37,6 +39,11 @@ export function DataTable<TData, TValue>({columns, data}: DataTableProps<TData, 
 
     return (
         <div>
+            <div className="flex justify-end pb-4">
+                <Link href={"/tokens/create"}>
+                    <Button variant="default">Neu</Button>
+                </Link>
+            </div>
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
