@@ -43,7 +43,10 @@ const DataTable = <TData, TValue>({ columns, data, refreshData }: DataTableProps
 
     return (
         <div>
-            <div className="flex justify-end pb-4">
+            <div className="flex justify-end pb-4 space-x-4">
+                <Link href={"http://localhost:8000/api/exports/xlsx"} target="_blank">
+                    <Button variant="secondary" className="cursor-pointer">Exportieren</Button>
+                </Link>
                 <Link href={"/assignments/create"}>
                     <Button variant="default" className="cursor-pointer">Neu</Button>
                 </Link>
