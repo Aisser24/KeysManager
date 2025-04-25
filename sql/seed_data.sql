@@ -19,11 +19,9 @@ INSERT INTO mitarbeiter (vorname, nachname, email, position, status) VALUES
     ('Michael', 'Fischer', 'michael.fischer@company.at', 'Buchhalter', 0);
 
 -- Insert sample data into keysmitarbeiter table
-INSERT INTO keyassignments (token_id, mitarbeiter_id, ausgabedatum) VALUES
-    (1, 1, current_date),
-    (2, 2, current_date),
-    (3, 3, current_date),
-    (4, 4, current_date),
-    (5, 5, current_date),
-    (1, 6, current_date),
-    (2, 7, current_date);
+INSERT INTO keyassignments (token_id, mitarbeiter_id) VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5)

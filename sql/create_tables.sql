@@ -11,8 +11,8 @@ create table tokens(
     is_active boolean default true,
     token_type varchar(45) default null,
     token_description varchar(255) default null,
-    added_date date default current_date,
-    deleted_date date default null
+    added_date timestamp default current_timestamp,
+    deleted_date datetime null default null
 );
 
 CREATE TABLE mitarbeiter (
@@ -28,8 +28,8 @@ CREATE TABLE mitarbeiter (
 create table keyassignments (
     token_id integer NOT NULL,
     mitarbeiter_id int(11) NOT NULL,
-    ausgabedatum date default current_date,
-    rueckgabedatum date default null,
+    ausgabedatum timestamp default current_timestamp,
+    rueckgabedatum datetime default NULL,
     primary key (token_id, mitarbeiter_id, ausgabedatum),
     foreign key (token_id) references tokens(token_id),
     foreign key (mitarbeiter_id) references mitarbeiter(mitarbeiter_id)

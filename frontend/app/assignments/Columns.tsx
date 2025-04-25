@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Assignment } from "@/types/api";
-import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { TrashIcon } from "@heroicons/react/20/solid";
 import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 
@@ -17,24 +17,6 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-
-const EditButton = ({ tokenId }: { tokenId: number }) => {
-    const router = useRouter()
-
-    return (
-        <Button
-            variant="outline"
-            className="h-8 w-8 p-0 cursor-pointer"
-            name="edit"
-            aria-label="Edit"
-            onClick={() => {
-                router.push(`/assignments/${tokenId}/edit`)
-            }}
-        >
-            <PencilIcon className="h-4 w-4" />
-        </Button>
-    )
-}
 
 type TableMeta = {
     refreshData?: () => void
@@ -133,14 +115,11 @@ export const columns: ColumnDef<Assignment>[] = [
             const meta = table.options.meta as TableMeta;
 
             return (
-                <div className="flex gap-2">
-                    <EditButton tokenId={row.original.token_id} />
-                    <ReturnButton 
-                        tokenId={row.original.token_id} 
-                        mitarbeiterId={row.original.mitarbeiter_id} 
-                        refreshData={meta?.refreshData}
-                    />
-                </div>
+                <ReturnButton 
+                    tokenId={row.original.token_id} 
+                    mitarbeiterId={row.original.mitarbeiter_id} 
+                    refreshData={meta?.refreshData}
+                />
             )
         },
     },

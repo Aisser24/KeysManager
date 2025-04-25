@@ -43,13 +43,18 @@ const AssignmentCrationForm = () => {
 
     const fetchTokens = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/tokens", {
+            const response = await fetch("http://localhost:8000/api/tokens/available/", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
             const data = await response.json();
+            if (!response.ok) {
+                setTokens([]);
+                return;
+            }
+
             setTokens(data);
         } catch (error) {
             console.error("Fehler beim Abrufen der Tokens:", error);
@@ -114,11 +119,17 @@ const AssignmentCrationForm = () => {
                             <SelectValue placeholder="Token auswählen" />
                         </SelectTrigger>
                         <SelectContent>
-                            {tokens.map((token) => (
-                                <SelectItem key={token.token_id} value={token.token_id.toString()}>
-                                    #{token.token_number} - {token.token_type} {token.token_description ? `(${token.token_description})` : ''}
-                                </SelectItem>
-                            ))}
+                            {tokens.length > 0 ? (
+                                tokens.map((token) => (
+                                    <SelectItem key={token.token_id} value={token.token_id.toString()}>
+                                        #{token.token_number} - {token.token_type} {token.token_description ? `(${token.token_description})` : ''}
+                                    </SelectItem>
+                                ))
+                            ) : (
+                                <div className="relative flex items-center justify-center py-3 text-sm text-gray-500 italic">
+                                    Keine Tokens verfügbar
+                                </div>
+                            )}
                         </SelectContent>
                     </Select>
                 </div>

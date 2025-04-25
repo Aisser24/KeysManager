@@ -180,6 +180,25 @@ function getTokenTypes(): void {
         echo json_encode([]);
     }
 }
+function getAvailableTokens(): void {
+    global $pdo;
+
+    $sql = "
+        SELECT t.token_id, t.token_number, t.token_type, t.token_description
+        FROM tokens t
+        LEFT JOIN keyassignments ka ON t.token_id = ka.token_id AND ka.rueckgabedatum IS NULL
+        WHERE ka.token_id IS NULL AND t.is_active = 1
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $tokens = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($tokens) {
+        echo json_encode($tokens);
+    } else {
+        http_response_code(404);
+        echo json_encode(['error' => 'No available tokens found']);
+    }
+}
 
 // Mitarbeiter
 function listMitarbeiter(): void

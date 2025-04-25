@@ -21,6 +21,7 @@ $router->add("PUT", "/tokens/{id}", "updateToken");
 $router->add("DELETE", "/tokens/{id}", "deleteToken");
 $router->add("GET", "/tokens/{id}/history", "getTokenHistory");
 $router->add("GET", "/tokens/types/", "getTokenTypes");
+$router->add("GET", "/tokens/available/", "getAvailableTokens");
 
 // Mitarbeiter
 $router->add("GET", "/mitarbeiter", "listMitarbeiter");
