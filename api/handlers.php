@@ -129,7 +129,7 @@ function deleteToken($id): void
         return;
     }
 
-    $sql = "UPDATE tokens SET is_active = 0 WHERE token_id = ?";
+    $sql = "UPDATE tokens SET is_active = 0, deleted_date = current_date WHERE token_id = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$id]);
     if ($stmt->rowCount()) {

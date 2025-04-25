@@ -22,9 +22,10 @@ import { Button } from "@/components/ui/button"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    refreshData?: () => void
 }
 
-const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
+const DataTable = <TData, TValue>({ columns, data, refreshData }: DataTableProps<TData, TValue>) => {
     const [rowSelection, setRowSelection] = useState({})
 
     const table = useReactTable({
@@ -35,6 +36,9 @@ const DataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValu
         state: {
             rowSelection,
         },
+        meta: {
+            refreshData
+        }
     })
 
     return (

@@ -36,7 +36,11 @@ const EditButton = ({ tokenId }: { tokenId: number }) => {
     )
 }
 
-const ReturnButton = ({ tokenId, mitarbeiterId }: { tokenId: number, mitarbeiterId: number }) => {
+type TableMeta = {
+    refreshData?: () => void
+}
+
+const ReturnButton = ({ tokenId, mitarbeiterId, refreshData }: { tokenId: number, mitarbeiterId: number, refreshData: (() => void) | undefined }) => {
     const router = useRouter();
     
     const confirmDelete = async () => {
@@ -54,6 +58,10 @@ const ReturnButton = ({ tokenId, mitarbeiterId }: { tokenId: number, mitarbeiter
 
             if (!response.ok) {
                 throw new Error("Fehler beim Zurückgeben des Tokens");
+            }
+
+            if (refreshData) {
+                refreshData();
             }
 
             router.push("/assignments?status=returned");
@@ -121,11 +129,19 @@ export const columns: ColumnDef<Assignment>[] = [
     },
     {
         id: "buttons",
-        cell: ({ row }) => (
-            <div className="flex gap-2">
-                <EditButton tokenId={row.original.token_id} />
-                <ReturnButton tokenId={row.original.token_id} mitarbeiterId={row.original.mitarbeiter_id} />
-            </div>
-        ),
+        cell: ({ row, table }) => {
+            const meta = table.options.meta as TableMeta;
+
+            return (
+                <div className="flex gap-2">
+                    <EditButton tokenId={row.original.token_id} />
+                    <ReturnButton 
+                        tokenId={row.original.token_id} 
+                        mitarbeiterId={row.original.mitarbeiter_id} 
+                        refreshData={meta?.refreshData}
+                    />
+                </div>
+            )
+        },
     },
 ];

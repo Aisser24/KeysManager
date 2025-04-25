@@ -29,7 +29,7 @@ create table keyassignments (
     token_id integer NOT NULL,
     mitarbeiter_id int(11) NOT NULL,
     ausgabedatum date default current_date,
-    rueckgabedatum date,
+    rueckgabedatum date default null,
     primary key (token_id, mitarbeiter_id, ausgabedatum),
     foreign key (token_id) references tokens(token_id),
     foreign key (mitarbeiter_id) references mitarbeiter(mitarbeiter_id)
