@@ -1,5 +1,6 @@
 import { Token } from "@/types/api";
 import TokenEditForm from "./TokenEditForm";
+import { config } from "@/config/config";
 
 const Page = async ({
     params,
@@ -7,7 +8,7 @@ const Page = async ({
     params: Promise<{ id: string }>;
 }) => {
     const { id } = await params;
-    const res = await fetch(`http://localhost:8000/api/tokens/${id}`, {
+    const res = await fetch(`${config.apiUrl}/tokens/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

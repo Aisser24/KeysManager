@@ -5,9 +5,10 @@ import { useCallback, useEffect, useState } from "react";
 import DataTable from "./DataTable";
 import { columns } from "./Columns";
 import StatusToast from "./StatusToast";
+import { config } from "@/config/config";
 
 export const fetchAssignmentsData = async () => {
-    const res = await fetch('http://localhost:8000/api/assignments/active', {
+    const res = await fetch(`${config.apiUrl}/assignments/active`, {
       method: 'GET',
       cache: 'no-store'
     });

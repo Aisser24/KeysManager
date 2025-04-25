@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from 'lucide-react';
+import { config } from '@/config/config';
 
 const AssignmentCrationForm = () => {
     const router = useRouter();
@@ -28,7 +29,7 @@ const AssignmentCrationForm = () => {
 
     const fetchMitarbeiter = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/mitarbeiter", {
+            const response = await fetch(`${config.apiUrl}/mitarbeiter`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -43,7 +44,7 @@ const AssignmentCrationForm = () => {
 
     const fetchTokens = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/tokens/available/", {
+            const response = await fetch(`${config.apiUrl}/tokens/available/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -68,7 +69,7 @@ const AssignmentCrationForm = () => {
 
         setIsLoading(true);
         try {
-            const response = await fetch("http://localhost:8000/api/assignments", {
+            const response = await fetch(`${config.apiUrl}/assignments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

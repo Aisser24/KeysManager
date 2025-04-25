@@ -17,6 +17,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { config } from "@/config/config";
 
 type TableMeta = {
     refreshData?: () => void
@@ -27,7 +28,7 @@ const ReturnButton = ({ tokenId, mitarbeiterId, refreshData }: { tokenId: number
     
     const confirmDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/assignments/return`, {
+            const response = await fetch(`${config.apiUrl}/assignments/return`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

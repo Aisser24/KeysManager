@@ -23,6 +23,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { config } from "@/config/config";
 
 const TokenEditForm = ({ token }: { token: Token }) => {
     const router = useRouter();
@@ -38,7 +39,7 @@ const TokenEditForm = ({ token }: { token: Token }) => {
 
     const fetchTokenTypes = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/tokens/types/", {
+            const response = await fetch(`${config.apiUrl}/tokens/types/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +64,7 @@ const TokenEditForm = ({ token }: { token: Token }) => {
     };
 
     const handleSave = async (tokenNumber: number, tokenType: string, tokenDescription: string) => {
-        const response = await fetch(`http://localhost:8000/api/tokens/${token.token_id}`, {
+        const response = await fetch(`${config.apiUrl}/tokens/${token.token_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -88,7 +89,7 @@ const TokenEditForm = ({ token }: { token: Token }) => {
 
     const confirmDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/tokens/${token.token_id}`, {
+            const response = await fetch(`${config.apiUrl}/tokens/${token.token_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

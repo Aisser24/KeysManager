@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { config } from "@/config/config";
 
 
 const TokenCreationForm = () => {
@@ -27,7 +28,7 @@ const TokenCreationForm = () => {
 
     const fetchTokenTypes = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/tokens/types/", {
+            const response = await fetch(`${config.apiUrl}/tokens/types/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -53,7 +54,7 @@ const TokenCreationForm = () => {
 
     const handleSave = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/tokens", {
+            const response = await fetch(`${config.apiUrl}/tokens`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

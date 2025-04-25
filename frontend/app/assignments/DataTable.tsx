@@ -18,6 +18,7 @@ import {
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { config } from "@/config/config"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -44,7 +45,7 @@ const DataTable = <TData, TValue>({ columns, data, refreshData }: DataTableProps
     return (
         <div>
             <div className="flex justify-end pb-4 space-x-4">
-                <Link href={"http://localhost:8000/api/exports/xlsx"} target="_blank">
+                <Link href={`${config.apiUrl}/exports/xlsx`} target="_blank">
                     <Button variant="secondary" className="cursor-pointer">Exportieren</Button>
                 </Link>
                 <Link href={"/assignments/create"}>
