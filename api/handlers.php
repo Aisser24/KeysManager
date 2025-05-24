@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 $pdo = require_once 'db.php';
 if (!$pdo) {
     http_response_code(500);
@@ -457,4 +457,9 @@ function exportXlsx(): void
         http_response_code(404);
         echo json_encode(['error' => 'No data found for export']);
     }
+}
+
+function testRoute(): void
+{
+    echo json_encode(['message' => 'Test route is working']);
 }

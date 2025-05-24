@@ -8,14 +8,36 @@ const Page = async ({
     params: Promise<{ id: string }>;
 }) => {
     const { id } = await params;
-    const res = await fetch(`${config.apiUrl}/tokens/${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        cache: 'no-store',
-    });
-    const data: Token = await res.json();
+    let data: Token | null = null;
+    
+    try {
+        console.log("Fetching token data for ID:", id);
+        console.log(`${config.apiUrlBackend}/tokens/${id}`);
+        const res = await fetch(`${config.apiUrlBackend}/tokens/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            cache: 'no-store',
+        });
+        
+        // Prüfen ob die Antwort erfolgreich war
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
+        data = await res.json();
+        console.log("Fetched token data:", data);
+        
+        // Prüfen ob Token existiert
+        if (!data) {
+            return <div className="container mx-auto py-10">Token nicht gefunden.</div>;
+        }
+        
+    } catch (error) {
+        console.error("Error fetching token data:", error);
+        return <div className="container mx-auto py-10">Fehler beim Laden des Tokens.</div>;
+    }
 
     return (
         <div className="container mx-auto py-10 flex flex-col items-center">
@@ -27,5 +49,5 @@ const Page = async ({
     );
 };
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 export default Page;
