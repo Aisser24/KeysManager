@@ -3,5 +3,5 @@ const API_URL_BACKEND = process.env.NEXT_PUBLIC_API_URL_BACKEND || 'http://api/a
 
 export const config = {
     apiUrl: API_URL,
-    apiUrlBackend: API_URL_BACKEND,
+    apiUrlBackend: API_URL,
 }
