@@ -9,7 +9,7 @@ const Navbar = () => {
         {/* Logo Section */}
         <div className="text-xl font-bold">
           <Link href="/" className="flex items-center space-x-2">
-            <h2 className="underline">Keysmanager</h2>
+            <h2>KEYSMANAGER</h2>
           </Link>
         </div>
 
