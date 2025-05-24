@@ -1,0 +1,52 @@
+services:
+  # PHP Backend
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+      - ./api:/var/www/html:delegated
+      - /var/www/html/vendor
+    depends_on:
+      - db
+    environment:
+      DBHOST: db
+      DBNAME: keysmanager
+      DBUSER: phpstorm_user
+      DBPASS: phpstorm
+      DBPORT: 3306
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - api
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/
+  
+  # MariaDB Database
+  db:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keysmanager
+      MYSQL_USER: phpstorm_user
+      MYSQL_PASSWORD: phpstorm
+
+volumes:
+  db_data:

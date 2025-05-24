@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Handle API routes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+# Set environment variable for PATH_INFO
+RewriteRule ^(.*)$ - [E=PATH_INFO:/$1]
