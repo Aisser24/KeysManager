@@ -290,7 +290,7 @@ function listActiveAssignments(): void
         t.token_type, 
         t.token_number, 
         t.token_description
-    FROM keyassignments ka
+    FROM active_keyassignments ka
     JOIN mitarbeiter m ON ka.mitarbeiter_id = m.mitarbeiter_id
     JOIN tokens t ON ka.token_id = t.token_id
     WHERE ka.rueckgabedatum IS NULL

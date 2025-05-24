@@ -1,10 +1,10 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { toast } from "sonner";
 
-const StatusToast = () => {
+const StatusToastContent = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -24,6 +24,7 @@ const StatusToast = () => {
                     break;
                 case 'create':
                     actionText = "Erstellen";
+                    break;
                 default:
                     actionText = "Aktion";
             }
@@ -38,6 +39,14 @@ const StatusToast = () => {
     }, [searchParams, router]);
 
     return null;
+}
+
+const StatusToast = () => {
+    return (
+        <Suspense fallback={null}>
+            <StatusToastContent />
+        </Suspense>
+    );
 }
 
 export default StatusToast

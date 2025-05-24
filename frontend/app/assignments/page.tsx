@@ -7,7 +7,7 @@ import { columns } from "./Columns";
 import StatusToast from "./StatusToast";
 import { config } from "@/config/config";
 
-export const fetchAssignmentsData = async () => {
+const fetchAssignmentsData = async () => {
     const res = await fetch(`${config.apiUrl}/assignments/active`, {
       method: 'GET',
       cache: 'no-store'

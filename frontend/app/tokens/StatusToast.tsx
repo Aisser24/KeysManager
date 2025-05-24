@@ -1,39 +1,35 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect } from "react";
 import { toast } from "sonner";
 
-const StatusToast = () => {
+const StatusToastContent = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const toastShownRef = useRef(false);
 
     useEffect(() => {
         const status = searchParams.get('status');
         const action = searchParams.get('action');
 
-        if (!status || toastShownRef.current) return;
-
-        toastShownRef.current = true;
-
-        if (status === 'updated') {
-            toast.success("Token erfolgreich aktualisiert")
-        } else if (status === 'deleted') {
+        // Hier Ihre spezifische Toast-Logik für Tokens
+        if (status === 'deleted') {
             toast.success("Token erfolgreich gelöscht")
         } else if (status === 'created') {
             toast.success("Token erfolgreich erstellt")
+        } else if (status === 'updated') {
+            toast.success("Token erfolgreich aktualisiert")
         } else if (status === 'error') {
             let actionText = "";
             switch (action) {
+                case 'delete':
+                    actionText = "Löschen";
+                    break;
                 case 'create':
                     actionText = "Erstellen";
                     break;
                 case 'update':
                     actionText = "Aktualisieren";
-                    break;
-                case 'delete':
-                    actionText = "Löschen";
                     break;
                 default:
                     actionText = "Aktion";
@@ -49,6 +45,14 @@ const StatusToast = () => {
     }, [searchParams, router]);
 
     return null;
+}
+
+const StatusToast = () => {
+    return (
+        <Suspense fallback={null}>
+            <StatusToastContent />
+        </Suspense>
+    );
 }
 
 export default StatusToast

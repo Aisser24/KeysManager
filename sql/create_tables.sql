@@ -1,4 +1,5 @@
-create database if not exists keysmanager default character set=utf8;
+drop database if exists keysmanager;
+create database keysmanager default character set=utf8;
 
 use keysmanager;
 
@@ -31,6 +32,12 @@ create table keyassignments (
     ausgabedatum timestamp default current_timestamp,
     rueckgabedatum datetime default NULL,
     primary key (token_id, mitarbeiter_id, ausgabedatum),
-    foreign key (token_id) references tokens(token_id),
-    foreign key (mitarbeiter_id) references mitarbeiter(mitarbeiter_id)
+    foreign key (token_id) references tokens(token_id) on delete cascade on update cascade,
+    foreign key (mitarbeiter_id) references mitarbeiter(mitarbeiter_id) on delete cascade on update cascade
 );
+
+create view active_keyassignments as
+    select ka.*
+    from keyassignments ka
+    join tokens t on ka.token_id = t.token_id
+    where t.is_active = true and ka.rueckgabedatum is null;
